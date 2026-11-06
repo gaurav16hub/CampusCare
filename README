@@ -1,0 +1,115 @@
+🎓 CampusCare – College Complaint Management System
+
+CampusCare is a web-based College Complaint Management System designed to make the complaint management process easier, faster, and more organized for students and college administrators.
+
+Students can register, submit complaints, and track their complaint status, while administrators can monitor and manage complaints through a dedicated Admin Dashboard.
+
+🚀 Project Overview
+
+CampusCare provides a digital platform where students can report college-related issues such as classroom problems, library facilities, hostel issues, canteen services, computer labs, electrical problems, and sanitation.
+
+The system helps improve communication between students and college administration.
+
+✨ Features
+
+👨‍🎓 Student Module
+
+- Student Registration and Login
+- Student Dashboard
+- Submit New Complaints
+- Select Complaint Category
+- Set Complaint Priority
+- Track Complaint Status
+- View Complaint History
+- View Complaint Statistics
+
+🛡️ Admin Module
+
+- Admin Login
+- Admin Dashboard
+- View Total Registered Students
+- View All Student Complaints
+- Monitor Pending, In Progress, and Resolved Complaints
+- Search Complaints
+- Filter Complaints by Category
+- Filter Complaints by Status
+- Filter Complaints by Priority
+- Reset Search and Filters
+
+🛠️ Technologies Used
+
+- HTML5 – Website Structure
+- CSS3 – Styling and Responsive Design
+- JavaScript – Functionality and Dynamic Operations
+- LocalStorage – Browser-Based Data Storage
+- Font Awesome – Icons
+- Google Fonts – Typography
+
+📂 Project Structure
+
+CampusCare/
+│
+├── index.html
+├── style.css
+│
+├── pages/
+│   ├── login.html
+│   ├── register.html
+│   ├── dashboard.html
+│   ├── complaint.html
+│   ├── my-complaints.html
+│   └── admin.html
+│
+├── js/
+│   ├── auth.js
+│   ├── dashboard.js
+│   ├── complaint.js
+│   ├── my-complaints.js
+│   └── admin.js
+│
+└── README.md
+
+💻 How to Run the Project
+
+1. Download or clone this repository.
+2. Open the project folder in VS Code.
+3. Open "index.html" in your browser.
+4. Register as a student and log in.
+5. Explore the complaint submission and tracking features.
+6. Access the Admin Module using the configured admin credentials.
+
+📌 Current Project Status
+
+- Student Registration and Login
+- Complaint Submission
+- Complaint Tracking
+- Admin Dashboard
+- Search and Filter Functionality
+- Responsive User Interface
+
+Note: This version uses browser LocalStorage for data storage. Data is browser-specific and is not automatically shared between different devices. A shared backend and database are required for a fully connected production system.
+
+🎯 Future Enhancements
+
+- Backend and Database Integration
+- Secure Role-Based Authentication
+- Email Notifications
+- Complaint Status Update Notifications
+- Deployment with a Production Database
+- Improved Reporting and Analytics
+
+👨‍💻 Developer
+
+Gaurav Kumar
+
+Computer Science Engineering Student
+
+Maharaja Surajmal Institute of Technology (MSIT), Delhi
+
+⭐ Support
+
+If you find this project useful, consider giving this repository a star ⭐ on GitHub.
+
+---
+
+CampusCare – Making College Complaint Management Simple, Digital, and Efficient.

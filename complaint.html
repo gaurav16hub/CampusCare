@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Submit Complaint | CampusCare</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+/* GLOBAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.dashboard-body {
+    background: #f5f6ff;
+    min-height: 100vh;
+    color: #1e293b;
+}
+
+/* HEADER */
+
+.dashboard-header {
+    background: linear-gradient(110deg,#172554,#4338ca,#7c3aed);
+    color: white;
+    padding: 17px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(79,70,229,.2);
+}
+
+.dashboard-header h2 {
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.dashboard-header h2 i {
+    color: #fbbf24;
+    margin-right: 9px;
+}
+
+.logout-btn {
+    background: rgba(255,255,255,.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+}
+
+/* MAIN */
+
+.complaint-container {
+    width: 92%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+/* HERO */
+
+.complaint-hero {
+    background:
+        radial-gradient(circle at 90% 10%,#9333ea,transparent 35%),
+        linear-gradient(120deg,#2563eb,#4338ca,#7c3aed);
+    color: white;
+    padding: 38px;
+    border-radius: 22px;
+    margin-bottom: 30px;
+    box-shadow: 0 12px 30px rgba(79,70,229,.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.complaint-hero::after {
+    content: "✦";
+    position: absolute;
+    right: 45px;
+    top: -30px;
+    font-size: 150px;
+    color: rgba(255,255,255,.12);
+}
+
+.complaint-hero h1 {
+    color: white;
+    font-size: clamp(27px,4vw,37px);
+    margin: 12px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.complaint-hero p {
+    color: #e0e7ff;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-label {
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.2);
+    font-size: 12px;
+}
+
+/* FORM CARD */
+
+.complaint-form-card {
+    background: white;
+    padding: 35px;
+    border-radius: 22px;
+    border: 1px solid #edf0ff;
+    box-shadow: 0 10px 35px rgba(30,41,59,.06);
+}
+
+.form-title {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf0ff;
+}
+
+.form-title h2 {
+    color: #172554;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.form-title p {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* FORM GROUP */
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 10px;
+}
+
+.form-group label i {
+    color: #7c3aed;
+    margin-right: 7px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    background: #f8faff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 11px;
+    outline: none;
+    color: #172554;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.form-control:focus {
+    border-color: #7c3aed;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(124,58,237,.1);
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.7;
+}
+
+/* CATEGORY SELECT */
+
+#category {
+    cursor: pointer;
+}
+
+/* PRIORITY OPTIONS */
+
+.priority-options {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 13px;
+}
+
+.priority-option {
+    position: relative;
+}
+
+.priority-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.priority-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 14px 10px;
+    border-radius: 12px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8faff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.priority-option.low label {
+    color: #059669;
+}
+
+.priority-option.medium label {
+    color: #d97706;
+}
+
+.priority-option.high label {
+    color: #dc2626;
+}
+
+.priority-option input:checked + label {
+    box-shadow: 0 0 0 3px rgba(124,58,237,.10);
+    border-color: #7c3aed;
+    background: #f5f3ff;
+}
+
+/* SUBMIT BUTTON */
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(120deg,#4338ca,#7c3aed,#9333ea);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(124,58,237,.22);
+    transition: .3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(124,58,237,.3);
+}
+
+.submit-btn i {
+    margin-left: 9px;
+}
+
+/* MESSAGE */
+
+#complaintMessage {
+    text-align: center;
+    margin-top: 17px;
+    font-size: 13px;
+    min-height: 20px;
+}
+
+/* INFO BOX */
+
+.info-box {
+    background: linear-gradient(120deg,#eef2ff,#faf5ff);
+    border-left: 5px solid #7c3aed;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+.info-box h3 {
+    color: #4338ca;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.info-box p {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 25px;
+    padding: 13px 23px;
+    background: linear-gradient(120deg,#4338ca,#9333ea);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* FOOTER */
+
+.complaint-footer {
+    margin-top: 45px;
+    padding: 22px;
+    text-align: center;
+    background: #172554;
+    color: #cbd5e1;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:650px) {
+
+    .dashboard-header {
+        padding: 15px 4%;
+    }
+
+    .dashboard-header h2 {
+        font-size: 20px;
+    }
+
+    .complaint-container {
+        width: 93%;
+        margin: 22px auto;
+    }
+
+    .complaint-hero {
+        padding: 28px 20px;
+    }
+
+    .complaint-form-card {
+        padding: 22px 17px;
+    }
+
+    .priority-options {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+
+</head>
+
+<body class="dashboard-body">
+
+<!-- HEADER -->
+
+<header class="dashboard-header">
+
+    <h2>
+        <i class="fas fa-graduation-cap"></i>
+        CampusCare
+    </h2>
+
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-right-from-bracket"></i>
+        Logout
+    </button>
+
+</header>
+
+
+<main class="complaint-container">
+
+
+    <!-- HERO -->
+
+    <section class="complaint-hero">
+
+        <span class="hero-label">
+            <i class="fas fa-file-circle-plus"></i>
+            Complaint Registration
+        </span>
+
+        <h1>
+            Submit a Complaint
+            <i class="fas fa-pen-to-square"></i>
+        </h1>
+
+        <p>
+            Tell us about the issue you are facing in college.
+            Your feedback helps us create a better campus.
+        </p>
+
+    </section>
+
+
+    <!-- FORM -->
+
+    <section class="complaint-form-card">
+
+        <div class="form-title">
+
+            <h2>
+                <i class="fas fa-clipboard-list"
+                style="color:#7c3aed;margin-right:8px;"></i>
+                Complaint Details
+            </h2>
+
+            <p>
+                Please fill in all the required information below.
+            </p>
+
+        </div>
+
+
+        <!-- EXISTING FORM ID PRESERVED -->
+
+        <form id="complaintForm">
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="category">
+                    <i class="fas fa-layer-group"></i>
+                    Complaint Category
+                </label>
+
+                <select id="category" class="form-control" required>
+
+                    <option value="">Select Category</option>
+                    <option value="Classroom">🏫 Classroom</option>
+                    <option value="Library">📚 Library</option>
+                    <option value="Hostel">🏠 Hostel</option>
+                    <option value="Canteen">🍽️ Canteen</option>
+                    <option value="Computer Lab">💻 Computer Lab</option>
+                    <option value="Electrical">⚡ Electrical</option>
+                    <option value="Sanitation">🧹 Sanitation</option>
+                    <option value="Other">📌 Other</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+                <label for="title">
+                    <i class="fas fa-heading"></i>
+                    Complaint Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    class="form-control"
+                    placeholder="Enter complaint subject"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="description">
+                    <i class="fas fa-align-left"></i>
+                    Complaint Description
+                </label>
+
+                <textarea
+                    id="description"
+                    class="form-control"
+                    placeholder="Describe your problem in detail..."
+                    rows="6"
+                    maxlength="1000"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- PRIORITY -->
+
+            <div class="form-group">
+
+                <label>
+                    <i class="fas fa-flag"></i>
+                    Select Complaint Priority
+                </label>
+
+                <div class="priority-options">
+
+                    <div class="priority-option low">
+
+                        <input
+                            type="radio"
+                            id="priorityLow"
+                            name="priorityChoice"
+                            value="Low"
+                        >
+
+                        <label for="priorityLow">
+                            <i class="fas fa-circle-check"></i>
+                            Low
+                        </label>
+
+                    </div>
+
+
+                    <div class="priority-option medium">
+
+                        <input
+                            type="radio"
+                            id="priorityMedium"
+                            name="priorityChoice"
+                            value="Medium"
+                        >
+
+                        <label for="priorityMedium">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            Medium
+                        </label>
+
+                    </div>
+
+
+                    <div class="priority-option high">
+
+                        <input
+                            type="radio"
+                            id="priorityHigh"
+                            name="priorityChoice"
+                            value="High"
+                        >
+
+                        <label for="priorityHigh">
+                            <i class="fas fa-circle-exclamation"></i>
+                            High
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <!-- EXISTING PRIORITY ID PRESERVED -->
+
+                <select id="priority" class="form-control"
+                style="margin-top:12px;" required>
+
+                    <option value="">Confirm Priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit" class="submit-btn">
+
+                <i class="fas fa-paper-plane"></i>
+                Submit Complaint
+
+            </button>
+
+
+            <!-- EXISTING MESSAGE ID PRESERVED -->
+
+            <p id="complaintMessage"
+            role="status" aria-live="polite"></p>
+
+
+        </form>
+
+
+        <div class="info-box">
+
+            <h3>
+                <i class="fas fa-circle-info"></i>
+                Important Information
+            </h3>
+
+            <p>
+                Please provide accurate information about your
+                complaint. Your complaint will be registered
+                and can be tracked through the My Complaints page.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- BACK -->
+
+    <button class="back-btn"
+    onclick="location.href='dashboard.html'">
+
+        <i class="fas fa-arrow-left"></i>
+        Back to Dashboard
+
+    </button>
+
+
+</main>
+
+
+<footer class="complaint-footer">
+
+    <p>
+        © 2026 CampusCare | Smart Campus Complaint Management System
+    </p>
+
+    <p style="margin-top:7px;">
+        Made for a Better Campus
+        <i class="fas fa-heart" style="color:#f43f5e;"></i>
+    </p>
+
+</footer>
+
+
+<!-- PRIORITY VISUAL SELECTION SYNC -->
+
+<script>
+
+document.querySelectorAll(
+    'input[name="priorityChoice"]'
+).forEach(radio => {
+
+    radio.addEventListener("change", function() {
+
+        document.getElementById("priority").value = this.value;
+
+    });
+
+});
+
+document.getElementById("priority").addEventListener("change", function() {
+
+    const selected = this.value;
+
+    document.querySelectorAll(
+        'input[name="priorityChoice"]'
+    ).forEach(radio => {
+
+        radio.checked = radio.value === selected;
+
+    });
+
+});
+
+</script>
+
+
+<!-- EXISTING COMPLAINT JAVASCRIPT -->
+
+<script src="../js/complaint.js"></script>
+
+</body>
+</html>

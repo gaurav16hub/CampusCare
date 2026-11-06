@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | CampusCare</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.dashboard-body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6ff;
+            color: #202747;
+            min-height: 100vh;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(110deg, #4338ca, #6d28d9, #2563eb);
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(67, 56, 202, 0.2);
+        }
+
+        .dashboard-header h2 {
+            font-size: 23px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .dashboard-header h2 i {
+            margin-right: 9px;
+        }
+
+        .logout-btn {
+            border: 1px solid rgba(255,255,255,.5);
+            background: rgba(255,255,255,.14);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .logout-btn:hover {
+            background: white;
+            color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .admin-main {
+            width: 90%;
+            max-width: 1450px;
+            margin: 35px auto;
+        }
+
+        .admin-welcome {
+            background: linear-gradient(115deg, #4338ca, #7c3aed, #2563eb);
+            padding: 35px;
+            border-radius: 22px;
+            color: white;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(79, 70, 229, .18);
+        }
+
+        .admin-welcome::after {
+            content: "\f0e4";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 55px;
+            top: 20px;
+            font-size: 105px;
+            color: rgba(255,255,255,.12);
+        }
+
+        .admin-welcome h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .admin-welcome p {
+            color: #e0e7ff;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 23px 20px;
+            border-radius: 17px;
+            box-shadow: 0 5px 20px rgba(40, 50, 100, .06);
+            border: 1px solid #edf0ff;
+            transition: .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(40, 50, 100, .11);
+        }
+
+        .admin-card .stat-icon {
+            width: 43px;
+            height: 43px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 13px;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .admin-card:nth-child(1) .stat-icon {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .admin-card:nth-child(2) .stat-icon {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .admin-card:nth-child(3) .stat-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .admin-card:nth-child(4) .stat-icon {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .admin-card:nth-child(5) .stat-icon {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .admin-card h3 {
+            font-size: 13px;
+            color: #737b98;
+            font-weight: 500;
+            margin-bottom: 7px;
+        }
+
+        .admin-card h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #202747;
+        }
+
+        .admin-table-section {
+            background: white;
+            padding: 27px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(40, 50, 100, .06);
+            border: 1px solid #edf0ff;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            font-size: 21px;
+            color: #252b50;
+        }
+
+        .section-heading span {
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .admin-filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding: 18px;
+            background: #f8f9ff;
+            border: 1px solid #edf0ff;
+            border-radius: 14px;
+        }
+
+        .admin-filters input,
+        .admin-filters select {
+            width: 100%;
+            min-width: 0;
+            padding: 12px 13px;
+            border: 1px solid #dce1f1;
+            border-radius: 9px;
+            background: white;
+            color: #333b5c;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .admin-filters input:focus,
+        .admin-filters select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+        }
+
+        #resetFilters {
+            border: none;
+            border-radius: 9px;
+            padding: 11px 16px;
+            background: linear-gradient(110deg, #4338ca, #7c3aed);
+            color: white;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: .3s;
+            white-space: nowrap;
+        }
+
+        #resetFilters:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79,70,229,.25);
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid #edf0ff;
+            border-radius: 12px;
+        }
+
+        .complaints-table {
+            width: 100%;
+            min-width: 950px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .complaints-table th {
+            background: #f1f3ff;
+            color: #4b5274;
+            padding: 15px 13px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .complaints-table td {
+            padding: 15px 13px;
+            border-bottom: 1px solid #edf0f7;
+            color: #555e7b;
+            font-size: 12px;
+        }
+
+        .complaints-table tbody tr {
+            transition: .2s;
+        }
+
+        .complaints-table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        .complaints-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 1100px) {
+            .admin-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .admin-filters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #resetFilters {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .dashboard-header {
+                padding: 15px 5%;
+            }
+
+            .dashboard-header h2 {
+                font-size: 18px;
+            }
+
+            .admin-main {
+                width: 92%;
+                margin: 22px auto;
+            }
+
+            .admin-welcome {
+                padding: 25px 20px;
+            }
+
+            .admin-welcome h1 {
+                font-size: 23px;
+            }
+
+            .admin-welcome::after {
+                right: 15px;
+                top: 25px;
+                font-size: 65px;
+            }
+
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .admin-card {
+                padding: 17px 14px;
+            }
+
+            .admin-card h1 {
+                font-size: 25px;
+            }
+
+            .admin-card h3 {
+                font-size: 11px;
+            }
+
+            .admin-table-section {
+                padding: 17px 12px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .section-heading h2 {
+                font-size: 18px;
+            }
+
+            .admin-filters {
+                grid-template-columns: 1fr;
+                padding: 13px;
+            }
+
+            #resetFilters {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+
+    <header class="dashboard-header">
+        <h2><i class="fa-solid fa-shield-halved"></i> CampusCare Admin</h2>
+
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+    </header>
+
+    <main class="admin-main">
+
+        <section class="admin-welcome">
+            <h1>Admin Dashboard</h1>
+            <p>Manage and monitor all student complaints from one place.</p>
+        </section>
+
+        <section class="admin-stats">
+
+            <div class="admin-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <h3>Total Students</h3>
+                <h1 id="totalStudents">0</h1>
+            </div>
+
+            <div class="admin-card">
+                <div class="stat-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h3>Total Complaints</h3>
+                <h1 id="totalComplaints">0</h1>
+            </div>
+
+            <div class="admin-card">
+                <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3>Pending</h3>
+                <h1 id="pendingComplaints">0</h1>
+            </div>
+
+            <div class="admin-card">
+                <div class="stat-icon"><i class="fa-solid fa-spinner"></i></div>
+                <h3>In Progress</h3>
+                <h1 id="progressComplaints">0</h1>
+            </div>
+
+            <div class="admin-card">
+                <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>Resolved</h3>
+                <h1 id="resolvedComplaints">0</h1>
+            </div>
+
+        </section>
+
+        <section class="admin-table-section">
+
+            <div class="section-heading">
+                <h2><i class="fa-solid fa-list-check"></i> All Student Complaints</h2>
+                <span><i class="fa-solid fa-chart-simple"></i> Complaint Management</span>
+            </div>
+
+            <div class="admin-filters">
+
+                <input
+                    type="text"
+                    id="searchComplaint"
+                    placeholder="Search by ID, student name or subject..."
+                >
+
+                <select id="filterCategory">
+                    <option value="">All Categories</option>
+                    <option value="Classroom">Classroom</option>
+                    <option value="Library">Library</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Canteen">Canteen</option>
+                    <option value="Computer Lab">Computer Lab</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Sanitation">Sanitation</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <select id="filterStatus">
+                    <option value="">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <select id="filterPriority">
+                    <option value="">All Priorities</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+
+                <button type="button" id="resetFilters">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Filters
+                </button>
+
+            </div>
+
+            <div class="table-wrapper">
+                <table class="complaints-table">
+
+                    <thead>
+                        <tr>
+                            <th>Complaint ID</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Category</th>
+                            <th>Subject</th>
+                            <th>Priority</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="adminComplaintsTable">
+                        <tr>
+                            <td colspan="8">Loading complaints...</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>
