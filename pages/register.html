@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | CampusCare</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body.register-page {
+            min-height: 100vh;
+            padding: 35px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(circle at 10% 15%, #818cf8, transparent 30%),
+                radial-gradient(circle at 90% 85%, #c084fc, transparent 30%),
+                linear-gradient(135deg,#172554,#4338ca,#7e22ce);
+        }
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 30px 90px rgba(0,0,0,.25);
+            animation: appear .7s ease;
+        }
+
+        /* LEFT PANEL */
+
+        .register-left {
+            padding: 50px 45px;
+            color: white;
+            background:
+                radial-gradient(circle at 90% 10%,#9333ea,transparent 35%),
+                linear-gradient(145deg,#172554,#4338ca,#7c3aed);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-left::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 50%;
+            right: -130px;
+            top: 80px;
+        }
+
+        .register-left::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+            left: -100px;
+            bottom: -90px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-icon {
+            width: 55px;
+            height: 55px;
+            background: #fbbf24;
+            color: #312e81;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+        }
+
+        .brand h2 {
+            color: white;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .brand p {
+            color: #ddd6fe;
+            font-size: 11px;
+        }
+
+        .left-content {
+            position: relative;
+            z-index: 1;
+            margin: 45px 0;
+        }
+
+        .welcome-label {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(255,255,255,.13);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 22px;
+        }
+
+        .left-content h1 {
+            color: white;
+            font-size: 37px;
+            line-height: 1.35;
+            margin-bottom: 20px;
+        }
+
+        .left-content h1 span {
+            color: #fbbf24;
+        }
+
+        .left-content p {
+            color: #e0e7ff;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .benefits {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #f1f5f9;
+            font-size: 13px;
+        }
+
+        .benefit i {
+            color: #86efac;
+            font-size: 17px;
+        }
+
+        .left-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 30px;
+            color: #c7d2fe;
+            font-size: 11px;
+        }
+
+        /* RIGHT PANEL */
+
+        .register-right {
+            padding: 45px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 27px;
+        }
+
+        .small-title {
+            color: #7c3aed;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .form-heading h2 {
+            color: #172554;
+            font-size: 31px;
+            font-weight: 800;
+            margin: 9px 0;
+        }
+
+        .form-heading p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* INPUTS */
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid #e2e8f0;
+            background: #f8faff;
+            border-radius: 11px;
+            padding: 0 14px;
+            transition: .3s;
+        }
+
+        .input-box:focus-within {
+            border-color: #7c3aed;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(124,58,237,.1);
+        }
+
+        .input-box > i {
+            color: #818cf8;
+            font-size: 16px;
+        }
+
+        .input-box input {
+            width: 100%;
+            min-width: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 13px 11px;
+            font-size: 13px;
+            color: #172554;
+        }
+
+        .input-box input:focus {
+            box-shadow: none;
+        }
+
+        .input-box input::placeholder {
+            color: #94a3b8;
+        }
+
+        .toggle-password {
+            border: none;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .toggle-password:hover {
+            color: #7c3aed;
+        }
+
+        /* BUTTON */
+
+        .register-button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 9px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(120deg,#4338ca,#7c3aed,#9333ea);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(124,58,237,.25);
+            transition: .3s;
+        }
+
+        .register-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(124,58,237,.35);
+        }
+
+        .register-button i {
+            margin-left: 9px;
+        }
+
+        /* MESSAGE */
+
+        #message {
+            min-height: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        /* LINKS */
+
+        .login-text {
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .login-text a {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            color: #7c3aed;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MOBILE */
+
+        @media(max-width:800px) {
+
+            .register-wrapper {
+                max-width: 480px;
+                grid-template-columns: 1fr;
+            }
+
+            .register-left {
+                padding: 30px;
+            }
+
+            .left-content {
+                margin: 30px 0 20px;
+            }
+
+            .left-content h1 {
+                font-size: 30px;
+            }
+
+            .benefits {
+                display: none;
+            }
+
+            .register-right {
+                padding: 35px 28px;
+            }
+        }
+
+        @media(max-width:420px) {
+
+            body.register-page {
+                padding: 12px;
+            }
+
+            .register-wrapper {
+                border-radius: 20px;
+            }
+
+            .register-left {
+                padding: 23px;
+            }
+
+            .register-right {
+                padding: 30px 20px;
+            }
+
+            .form-heading h2 {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body class="register-page">
+
+    <div class="register-wrapper">
+
+        <!-- LEFT PANEL -->
+
+        <div class="register-left">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2>CampusCare</h2>
+                    <p>Smart Campus Solution</p>
+                </div>
+
+            </div>
+
+
+            <div class="left-content">
+
+                <div class="welcome-label">
+                    <i class="fas fa-star"></i>
+                    Join CampusCare Today
+                </div>
+
+                <h1>
+                    Create Your<br>
+                    Account &<br>
+                    <span>Make a Difference.</span>
+                </h1>
+
+                <p>
+                    Become a part of a smarter campus.
+                    Connect with your college administration,
+                    submit complaints and make your voice heard.
+                </p>
+
+            </div>
+
+
+            <div class="benefits">
+
+                <div class="benefit">
+                    <i class="fas fa-circle-check"></i>
+                    Quick Student Registration
+                </div>
+
+                <div class="benefit">
+                    <i class="fas fa-circle-check"></i>
+                    Easy Complaint Management
+                </div>
+
+                <div class="benefit">
+                    <i class="fas fa-circle-check"></i>
+                    Transparent Complaint Tracking
+                </div>
+
+            </div>
+
+
+            <div class="left-footer">
+                © 2026 CampusCare. All Rights Reserved.
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+
+        <div class="register-right">
+
+            <div class="form-heading">
+
+                <span class="small-title">
+                    CREATE YOUR ACCOUNT
+                </span>
+
+                <h2>Get Started! ✨</h2>
+
+                <p>
+                    Register as a student to access CampusCare.
+                </p>
+
+            </div>
+
+
+            <!-- EXISTING FORM ID PRESERVED -->
+
+            <form id="registerForm">
+
+                <div class="input-group">
+
+                    <label for="name">Full Name</label>
+
+                    <div class="input-box">
+
+                        <i class="fas fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="regEmail">Email Address</label>
+
+                    <div class="input-box">
+
+                        <i class="fas fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="regEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="regPassword">Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fas fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="regPassword"
+                            placeholder="Create password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            data-target="regPassword"
+                            aria-label="Show password"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="confirmPassword">Confirm Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fas fa-shield-halved"></i>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            data-target="confirmPassword"
+                            aria-label="Show password"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="register-button">
+                    Create My Account
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+
+            <!-- EXISTING MESSAGE ID PRESERVED -->
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login Now
+                </a>
+
+            </div>
+
+
+            <a href="../index.html" class="back-home">
+
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PASSWORD VISIBILITY -->
+
+    <script>
+
+        document.querySelectorAll(".toggle-password").forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                const target = document.getElementById(
+                    this.dataset.target
+                );
+
+                const isHidden = target.type === "password";
+
+                target.type = isHidden ? "text" : "password";
+
+                this.innerHTML = isHidden
+                    ? '<i class="fas fa-eye-slash"></i>'
+                    : '<i class="fas fa-eye"></i>';
+
+                this.setAttribute(
+                    "aria-label",
+                    isHidden ? "Hide password" : "Show password"
+                );
+
+            });
+
+        });
+
+    </script>
+
+
+    <!-- EXISTING AUTHENTICATION SCRIPT -->
+
+    <script src="../js/auth.js"></script>
+
+</body>
+</html>

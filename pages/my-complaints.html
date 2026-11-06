@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Complaints | CampusCare</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+/* GLOBAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.dashboard-body {
+    background: #f5f6ff;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.dashboard-header {
+    background: linear-gradient(110deg,#172554,#4338ca,#7c3aed);
+    color: white;
+    padding: 17px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(79,70,229,.2);
+}
+
+.dashboard-header h2 {
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.dashboard-header h2 i {
+    color: #fbbf24;
+    margin-right: 9px;
+}
+
+.logout-btn {
+    background: rgba(255,255,255,.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+}
+
+/* MAIN CONTAINER */
+
+.tracking-container {
+    width: 92%;
+    max-width: 1250px;
+    margin: 35px auto;
+}
+
+/* HERO */
+
+.tracking-hero {
+    background:
+        radial-gradient(circle at 90% 10%,#9333ea,transparent 35%),
+        linear-gradient(120deg,#2563eb,#4338ca,#7c3aed);
+    padding: 38px;
+    border-radius: 23px;
+    color: white;
+    margin-bottom: 35px;
+    box-shadow: 0 12px 30px rgba(79,70,229,.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.tracking-hero::after {
+    content: "✦";
+    position: absolute;
+    right: 55px;
+    top: -35px;
+    font-size: 160px;
+    color: rgba(255,255,255,.12);
+}
+
+.tracking-hero h1 {
+    color: white;
+    font-size: clamp(27px,4vw,38px);
+    font-weight: 800;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.tracking-hero p {
+    color: #e0e7ff;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.2);
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+/* SECTION HEADING */
+
+.section-title {
+    font-size: 23px;
+    font-weight: 800;
+    color: #172554;
+    margin-bottom: 20px;
+}
+
+.section-title i {
+    color: #7c3aed;
+    margin-right: 9px;
+}
+
+/* SUMMARY CARDS */
+
+.tracking-summary {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    margin-bottom: 38px;
+}
+
+.tracking-card {
+    background: white;
+    padding: 23px;
+    border-radius: 19px;
+    border: 1px solid #edf0ff;
+    box-shadow: 0 7px 25px rgba(30,41,59,.06);
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.tracking-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(79,70,229,.13);
+}
+
+.tracking-card:nth-child(1) {
+    border-top: 5px solid #4f46e5;
+}
+
+.tracking-card:nth-child(2) {
+    border-top: 5px solid #f59e0b;
+}
+
+.tracking-card:nth-child(3) {
+    border-top: 5px solid #0ea5e9;
+}
+
+.tracking-card:nth-child(4) {
+    border-top: 5px solid #10b981;
+}
+
+.tracking-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    margin-bottom: 17px;
+}
+
+.tracking-card:nth-child(1) .tracking-icon {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.tracking-card:nth-child(2) .tracking-icon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.tracking-card:nth-child(3) .tracking-icon {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+.tracking-card:nth-child(4) .tracking-icon {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.tracking-card h3 {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.tracking-card h2 {
+    color: #172554;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* HISTORY SECTION */
+
+.complaints-list-section {
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid #edf0ff;
+    box-shadow: 0 7px 25px rgba(30,41,59,.05);
+    margin-bottom: 30px;
+}
+
+.complaints-list-section h2 {
+    color: #172554;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.complaints-list-section h2 i {
+    color: #7c3aed;
+    margin-right: 9px;
+}
+
+/* TABLE */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 13px;
+    border: 1px solid #edf0ff;
+}
+
+.complaints-table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.complaints-table th {
+    background: linear-gradient(110deg,#312e81,#5b21b6);
+    color: white;
+    padding: 17px 15px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.complaints-table td {
+    padding: 16px 15px;
+    border-bottom: 1px solid #edf0ff;
+    color: #475569;
+    font-size: 13px;
+}
+
+.complaints-table tbody tr {
+    transition: .2s;
+}
+
+.complaints-table tbody tr:nth-child(even) {
+    background: #fafaff;
+}
+
+.complaints-table tbody tr:hover {
+    background: #f0edff;
+}
+
+/* STATUS BADGES */
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.in-progress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.resolved {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* PRIORITY */
+
+.low {
+    color: #059669;
+    background: #d1fae5;
+}
+
+.medium {
+    color: #b45309;
+    background: #fef3c7;
+}
+
+.high {
+    color: #dc2626;
+    background: #fee2e2;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+    text-align: center;
+    padding: 35px 15px;
+    color: #64748b;
+}
+
+.empty-state i {
+    display: block;
+    font-size: 45px;
+    color: #a78bfa;
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    color: #334155;
+    margin-bottom: 7px;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(120deg,#4338ca,#9333ea);
+    color: white;
+    border: none;
+    padding: 13px 25px;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(79,70,229,.2);
+    transition: .3s;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(79,70,229,.3);
+}
+
+/* FOOTER */
+
+.tracking-footer {
+    margin-top: 45px;
+    padding: 22px;
+    text-align: center;
+    background: #172554;
+    color: #cbd5e1;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+    .tracking-summary {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px) {
+
+    .dashboard-header {
+        padding: 15px 4%;
+    }
+
+    .dashboard-header h2 {
+        font-size: 20px;
+    }
+
+    .tracking-container {
+        width: 92%;
+        margin: 22px auto;
+    }
+
+    .tracking-hero {
+        padding: 28px 20px;
+    }
+
+    .tracking-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .tracking-card {
+        padding: 17px;
+    }
+
+    .tracking-card h2 {
+        font-size: 28px;
+    }
+
+    .tracking-card h3 {
+        font-size: 11px;
+    }
+
+    .complaints-list-section {
+        padding: 17px;
+    }
+
+}
+
+@media(max-width:350px) {
+    .tracking-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+
+</head>
+
+<body class="dashboard-body">
+
+<!-- HEADER -->
+
+<header class="dashboard-header">
+
+    <h2>
+        <i class="fas fa-graduation-cap"></i>
+        CampusCare
+    </h2>
+
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-right-from-bracket"></i>
+        Logout
+    </button>
+
+</header>
+
+
+<main class="tracking-container">
+
+
+    <!-- HERO -->
+
+    <section class="tracking-hero">
+
+        <span class="hero-label">
+            <i class="fas fa-chart-line"></i>
+            Complaint Management
+        </span>
+
+        <h1>
+            My Complaints
+            <i class="fas fa-file-circle-check"></i>
+        </h1>
+
+        <p>
+            Track your college complaints, monitor progress
+            and stay updated with every resolution.
+        </p>
+
+    </section>
+
+
+    <!-- SUMMARY -->
+
+    <h2 class="section-title">
+        <i class="fas fa-chart-pie"></i>
+        Complaint Overview
+    </h2>
+
+
+    <section class="tracking-summary">
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-icon">
+                <i class="fas fa-file-lines"></i>
+            </div>
+
+            <h3>Total Complaints</h3>
+
+            <h2 id="totalCount">0</h2>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+
+            <h3>Pending</h3>
+
+            <h2 id="pendingCount">0</h2>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-icon">
+                <i class="fas fa-spinner"></i>
+            </div>
+
+            <h3>In Progress</h3>
+
+            <h2 id="progressCount">0</h2>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-icon">
+                <i class="fas fa-circle-check"></i>
+            </div>
+
+            <h3>Resolved</h3>
+
+            <h2 id="resolvedCount">0</h2>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPLAINT HISTORY -->
+
+    <section class="complaints-list-section">
+
+        <h2>
+            <i class="fas fa-clock-rotate-left"></i>
+            Complaint History
+        </h2>
+
+        <div class="table-wrapper">
+
+            <table class="complaints-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>Subject</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="complaintsTableBody">
+
+                    <tr>
+                        <td colspan="6" style="text-align:center;padding:30px;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            Loading complaints...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- BACK BUTTON -->
+
+    <button class="back-btn"
+    onclick="location.href='dashboard.html'">
+
+        <i class="fas fa-arrow-left"></i>
+        Back to Dashboard
+
+    </button>
+
+
+</main>
+
+
+<footer class="tracking-footer">
+
+    <p>
+        © 2026 CampusCare | Smart Campus Complaint Management System
+    </p>
+
+    <p style="margin-top:7px;">
+        Made for a Better Campus
+        <i class="fas fa-heart" style="color:#f43f5e;"></i>
+    </p>
+
+</footer>
+
+
+<!-- EXISTING JAVASCRIPT PRESERVED -->
+
+<script src="../js/my-complaints.js"></script>
+
+</body>
+</html>
